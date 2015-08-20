@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for id, name, alltimeuptimeratio, status in monitors %}
+<div class="progress">
+  <div class="progress-bar progress-bar-{{ status }}" role="progressbar" aria-valuenow="{{ alltimeuptimeratio }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ alltimeuptimeratio }}%">
+    <span>{{ name }}</span>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}
