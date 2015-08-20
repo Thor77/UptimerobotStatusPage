@@ -17,3 +17,5 @@ title = MySite
 [Robot]
 api_key = uptimerobot-api-key
 ```
+# Screenshot
+![screenshot](screenshot.png)
