@@ -39,4 +39,5 @@ def hello():
     else:
         return 501
 
-app.run()
+if __name__ == '__main__':
+    app.run()
