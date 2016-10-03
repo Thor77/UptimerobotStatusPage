@@ -1,14 +1,12 @@
 from flask import Flask, render_template
-from uptimerobot.uptimerobot import UptimeRobot
-from configparser import ConfigParser
 
-config = ConfigParser()
-config.read('config.ini')
-page_name = config['HTML']['title']
-api_key = config['Robot']['api_key']
+from uptimerobot.uptimerobot import UptimeRobot
 
 app = Flask(__name__)
-robot = UptimeRobot(api_key)
+app.config.from_pyfile('settings.py')
+
+page_name = app.config.get('PAGE_NAME', 'UptimeRobot')
+robot = UptimeRobot(app.config['UPTIMEROBOT_API_KEY'])
 status_down = ['8', '9']
 status_paused = ['0', '1']
 
