@@ -1,3 +1,5 @@
+from collections import namedtuple
+
 from flask import Flask, render_template
 
 from uptimerobot.uptimerobot import UptimeRobot
@@ -9,6 +11,8 @@ page_name = app.config.get('PAGE_NAME', 'UptimeRobot')
 robot = UptimeRobot(app.config['UPTIMEROBOT_API_KEY'])
 status_down = ['8', '9']
 status_paused = ['0', '1']
+
+Monitor = namedtuple('Monitor', ['id', 'name', 'uptime', 'status'])
 
 
 @app.route('/')
@@ -25,13 +29,11 @@ def hello():
                 status = 'warning'
             else:
                 status = 'success'
-            m = (
-                monitor['id'],
-                monitor['friendlyname'],
-                int(float(monitor['alltimeuptimeratio'])),
-                status
-                )
-            monitors_formatted.append(m)
+            monitors_formatted.append(Monitor(
+                id=monitor['id'], name=monitor['friendlyname'],
+                uptime=int(float(monitor['alltimeuptimeratio'])),
+                status=status
+            ))
         return render_template('index.html', monitors=monitors_formatted,
                                page_name=page_name)
     else:
