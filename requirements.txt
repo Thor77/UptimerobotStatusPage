@@ -1,5 +1,2 @@
 Flask
-Jinja2
-Werkzeug
-gunicorn
 python-uptimerobot
